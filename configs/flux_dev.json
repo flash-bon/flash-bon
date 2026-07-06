@@ -1,0 +1,12 @@
+{
+    "config_name": "flux_dev_dual_ann",
+    "cache_for_full_offset": 15,
+    "use_lite_mode": true,
+    "optimal_params": {
+        "only_first_n_timesteps": 48,
+        "no_skip_till_timestep": 11,
+        "skip_start_layer": 40,
+        "skip_end_layer": 44,
+        "cache_freq": 3
+    }
+}

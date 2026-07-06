@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+logs/
+outputs/
+.ffmpeg_shim/
+.vqa_deps/

@@ -1,0 +1,29 @@
+# Flash-BoN MAIN env: diffusion + the `fbon` package. run.py runs here. Python 3.12.
+#
+#   conda create -n flashbon python=3.12 -y && conda activate flashbon
+#   pip install -r envs/requirements-main.txt
+#
+# This project is NOT pip-installed -- run.py adds its own dir to sys.path. Do NOT `pip install -e .`.
+# torch/torchvision are CUDA (cu128) builds served by the extra index below; change cu128 to match
+# your CUDA (e.g. cu121) or drop the +cuXXX pins for a CPU/other build.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.9.0+cu128
+torchvision==0.24.0+cu128
+diffusers==0.38.0
+transformers==4.57.3
+tokenizers==0.22.1
+accelerate==1.12.0
+huggingface-hub==0.36.0
+safetensors==0.8.0
+sentencepiece==0.2.1
+numpy==2.2.6
+scipy==1.16.3
+pillow==12.0.0
+requests==2.32.5
+einops==0.8.1
+ftfy==6.3.1
+protobuf==6.33.2
+
+# Optional: FlashAttention-2 (used by the default --attn_backend flash). Needs a compiler + CUDA
+# toolkit, so install it separately AFTER the above (or run with --attn_backend sdpa):
+#   pip install flash-attn==2.8.3 --no-build-isolation

@@ -1,0 +1,12 @@
+{
+    "config_name": "wan_14b_dual_ann",
+    "cache_for_full_offset": 15,
+    "use_lite_mode": true,
+    "optimal_params": {
+        "only_first_n_timesteps": 49,
+        "no_skip_till_timestep": 2,
+        "skip_start_layer": 34,
+        "skip_end_layer": 35,
+        "cache_freq": 4
+    }
+}

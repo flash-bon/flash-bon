@@ -1,0 +1,26 @@
+# Flash-BoN VQAScore env: the final-eval metric server (t2v_metrics). Python 3.12.
+#
+#   conda create -n flashbon_vqa python=3.12 -y && conda activate flashbon_vqa
+#   pip install -r envs/requirements-vqa.txt
+#   conda install -c conda-forge ffmpeg -y      # t2v_metrics checks `ffmpeg -version` at import
+#   python -c "import t2v_metrics; print('ok')"  # verify the env is good
+#
+# NOTE: this env's transformers (5.x) differs from the main env's (4.x) -- keep them separate.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.9.0+cu128
+torchvision==0.24.0+cu128
+# pin torchaudio to MATCH torch (transformers 5.x imports it); a newer unpinned torchaudio won't load
+torchaudio==2.9.0+cu128
+t2v-metrics @ git+https://github.com/linzhiqiu/t2v_metrics.git@6ecb74f92028f42c7e64546d3a71e98c8c73068f
+transformers==5.12.1
+open-clip-torch==3.3.0
+sentencepiece==0.2.1
+Flask==3.1.3
+imageio==2.37.3
+imageio-ffmpeg==0.6.0
+numpy==2.2.6
+pillow==11.3.0
+requests==2.32.5
+einops==0.8.1
+ftfy==6.3.1
+cryptography<43
