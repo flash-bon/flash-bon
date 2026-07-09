@@ -1,6 +1,11 @@
 # Flash-BoN: Instant Drafts for Inference-Time Scaling in Diffusion Models
 
 [![arXiv](https://img.shields.io/badge/arXiv-2607.04461-b31b1b.svg)](https://arxiv.org/abs/2607.04461)
+[![Project Page](https://img.shields.io/badge/Project-Page-blue.svg)](https://flash-bon.github.io/)
+
+Ruchit Rawal, Reza Shirkavand, Sayak Paul, Yuxin Wen, Heng Huang, Yizheng Chen, Tom Goldstein, Gowthami Somepalli
+
+**Accepted to ECCV 2026.**
 
 Budget-constrained, verifier-guided best-of-N generation for diffusion models. Given a prompt and a
 wall-clock budget, Flash-BoN drafts cheap candidates (TaylorSeer-style caching + layer/timestep
@@ -23,6 +28,27 @@ draft's captured state. Because drafting is near-free, far more candidates fit i
 <p align="center">
   <img src="assets/method_fig_white_bg.001.jpeg" width="90%">
 </p>
+
+## Additional findings
+
+- **NFEs are a misleading efficiency metric.** Counting function evaluations ignores verifier
+  overhead; under realistic wall-clock budgets, plain Best-of-N already matches or outperforms
+  guided search methods like BFS/DFS/ZOS.
+- **Gains grow with model scale.** Flash-BoN's improvement over Best-of-N widens on larger models,
+  with up to a **+8% AUC** gain on Wan2.1&nbsp;14B and FLUX.1-dev, and leads across all ten
+  GenAI-Bench categories on Wan2.1&nbsp;1.3B.
+- **Diversity drives quality.** Draft-pool diversity (measured with the Vendi Score) correlates
+  strongly with downstream performance (Pearson **r&nbsp;=&nbsp;0.75**) — because drafting is
+  near-free, Flash-BoN explores a much more diverse candidate pool per budget.
+- **Composable with other techniques.** Stacking Flash-BoN with Reflection-Tuning (prompt
+  optimization) adds **+16% AUC**; stacking with BFS adds **+6% AUC**.
+- **Ties are common.** Over 80% of prompts produce ties on the top pointwise verifier score, which
+  is why Flash-BoN's selection stage combines pointwise scoring with a multi-stage Elo tournament
+  rather than relying on pointwise scores alone.
+- **Speeds up RL post-training too.** Used to build training pairs, Flash-BoN (as
+  Flash-Flow-GRPO) reaches the same reward as the baseline in **10x fewer** training steps.
+
+See the [project page](https://flash-bon.github.io/) for qualitative examples and full ablations.
 
 ## Layout
 
